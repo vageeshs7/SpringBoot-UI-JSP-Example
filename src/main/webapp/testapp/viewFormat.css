@@ -1,0 +1,99 @@
+body
+{
+	background:#FFFFD0;
+	color:black;
+	font: "Times New Roman", Verdana, sans-serif;
+	z-index:0;
+}
+
+h1.main
+{
+	color: #333399;
+	text-align:center;
+	font-size: 22px;
+	font-weight: normal;
+}
+
+h2.error
+{
+	color:red
+}
+h2.correct
+{
+	color:green
+}
+
+h2.special
+{
+	color:#DA4F3A
+}
+
+p.note
+{
+	color:blue;
+}
+p.errr
+{
+	color:red
+}
+
+table
+{
+	border-collapse:collapse;
+}
+table tr th
+{
+	background-color:orange;
+	text-align:left;
+}
+table tr td
+{
+	text-align: left;
+}
+table tr td
+{
+	padding: 2px;
+}
+
+.tableMouseOver
+{
+	background-color: #99CCCC;
+}
+
+.tableMouseClick
+{
+	background-color: #DAA520;
+}
+
+.linkHover
+{
+	color: green;
+	
+}
+
+.rightAlign
+{
+	text-align:right;
+}
+
+.centerAlign
+{
+	text-align:center;
+}
+
+a
+{
+	color: blue;
+	text-decoration: none;
+}
+
+.modalDialog
+{
+	display:none;
+	z-index:100;
+	position:absolute;
+	width: 700px;
+	border: 1px solid black;
+	background-color: #FFFFD0;
+}
+

@@ -10,6 +10,7 @@
 
 <head>
 <title>First Web Application</title>
+<link rel="stylesheet" type="text/css" href="/testapp/viewFormat.css">
 </head>
 
 <body>
@@ -19,7 +20,7 @@
     Size = <%= todoList.size() %>
     <br/>
     <% if(todoList.size() > 0) {%>
-    <table>
+    <table border="1" width="70%" class="dataTable">
     	<tr>
     		<th>ID</th>
     		<th>Description</th>
