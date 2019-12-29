@@ -42,28 +42,6 @@
     
     <br/>
     Your Name is : ${name}
-    
-     <table border="1" class="dataTable" width="100%">
-            <tr>
-                <th>Sl.no</th>
-                <th>Name</th>
-                <th>District</th>
-                <th>Taluk</th>
-                <th>Location</th>
-                <th>Office</th>
-            </tr>
-            <% int i=1;
-            for(EmployeeInvoiceDataReport eidReport : eidReportList) { %>
-            <tr>
-                <th><%= i++ %> </th>
-                <th><%= eidReport.getVcaBo().getCandidate().getName() ></th>
-                <th><%= eidReport.getVcaBo().getDistrict().getDistrictName() ></th>
-                <th><%= eidReport.getVcaBo().getTaluk().getTalukName() ></th>
-                <th><%= eidReport.getVcaBo().getLocation().getLocationName() ></th>
-                <th><%= eidReport.getVcaBo().getOffice().getOfficeCode() ></th>
-            </tr>
-            <% } %>
-        </table>
 </body>
 
 </html>
