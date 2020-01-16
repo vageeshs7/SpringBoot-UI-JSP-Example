@@ -15,9 +15,6 @@
 
 <body>
     Here are the list of your todos:
-    ${todos} 
-    <BR/>
-    Size = <%= todoList.size() %>
     <br/>
     <% if(todoList.size() > 0) {%>
     <table border="1" width="70%" class="dataTable">

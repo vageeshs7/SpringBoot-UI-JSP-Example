@@ -13,14 +13,12 @@ import com.ot.springboot.uitest.dom.Todo;
 @Service
 public class TodoService {
     private static List<Todo> todos = new ArrayList<Todo>();
-    private static int todoCount = 3;
+    private static Integer todoCount = 3;
 
     static {
-        todos.add(new Todo(1, "admin", "Learn Spring MVC", new Date(),
-                false));
+        todos.add(new Todo(1, "admin", "Learn Spring MVC", new Date(),false));
         todos.add(new Todo(2, "admin", "Learn Struts", new Date(), false));
-        todos.add(new Todo(3, "admin", "Learn Hibernate", new Date(),
-                false));
+        todos.add(new Todo(3, "admin", "Learn Hibernate", new Date(),false));
     }
 
     public List<Todo> retrieveTodos(String user) {
@@ -31,5 +29,20 @@ public class TodoService {
             }
         }
         return filteredTodos;
+    }
+
+    public void addNewTodo(Todo todo, String user){
+        todo.setUser(user);
+        synchronized(todoCount){
+            todoCount++;
+            todo.setId(todoCount);
+        }
+
+        todos.add(todo);
+    }
+
+    public void markTodo(int id, boolean isDone){
+        Todo todo = todos.get(id-1);
+        todo.setDone(isDone);
     }
 }
