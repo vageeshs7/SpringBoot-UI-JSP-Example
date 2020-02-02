@@ -1,9 +1,11 @@
 <%@ page import="java.util.List,
-				com.ot.springboot.uitest.dom.*"
+				com.ot.springboot.uitest.dom.*,
+				java.text.SimpleDateFormat"
 %>
 
 <%
 	List<Todo> todoList = (List<Todo>)request.getAttribute("todos");
+	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 %>
 
 <html>
@@ -14,7 +16,8 @@
 </head>
 
 <body>
-    Here are the list of your todos:
+<div style="align-items: center;">
+	<h2>Todo List for ${name}</h2>
     <br/>
     <% if(todoList.size() > 0) {%>
     <table border="1" width="70%" class="dataTable">
@@ -28,7 +31,7 @@
     		<tr>
     			<td><%= todo.getId() %></td>
     			<td><%= todo.getDesc() %></td>
-    			<td><%= todo.getTargetDate() %></td>
+    			<td><%= dateFormat.format(todo.getTargetDate()) %></td>
     			<td><%= todo.isDone() %></td>
     		</tr>
     	<% } %>
@@ -36,9 +39,10 @@
     
     
     <% } %>
-    
-    <br/>
-    Your Name is : ${name}
+	<br/>
+	<a href="/add-new-todo"><button value="">Add New</button></a>
+	<br/>
+</div>
 </body>
 
 </html>
