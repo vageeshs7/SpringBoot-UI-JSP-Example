@@ -32,7 +32,7 @@ public class TodoController {
         return "add-new-todo";
     }
 
-    @RequestMapping(value = "/list-todos", method = RequestMethod.POST)
+    @RequestMapping(value = "/add-new-todo", method = RequestMethod.POST)
     public String submitNewTodo(final ModelMap model, @RequestParam final String desc,
             @RequestParam final String targetDateStr) throws ParseException {
         final String name = (String) model.get("name");

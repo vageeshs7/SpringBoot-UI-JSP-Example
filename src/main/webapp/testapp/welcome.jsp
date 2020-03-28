@@ -1,7 +1,8 @@
 <html>
 
 <head>
-<title>First Web Application</title>
+    <title>First Web Application</title>
+    <link rel="stylesheet" type="text/css" href="/testapp/viewFormat.css">
 </head>
 
 <body>
