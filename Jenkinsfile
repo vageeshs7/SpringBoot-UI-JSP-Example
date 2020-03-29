@@ -32,5 +32,10 @@ pipeline {
                 
             }
         }
+        stage ('Kubernetes Deployment') {
+            steps {
+                sh 'kubectl version'                
+            }
+        }
     }
 }
