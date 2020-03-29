@@ -34,7 +34,7 @@ pipeline {
         }
         stage ('Kubernetes Deployment') {
             steps {
-                sh 'kubectl version'                
+                sh 'kubectl set image deployment/springboot-ui-jsp-ex springboot-ui-jsp-ex=springboot-ui-jsp-example:2.${env.BUILD_ID} --record'                
             }
         }
     }
