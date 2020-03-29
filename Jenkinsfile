@@ -26,7 +26,10 @@ pipeline {
         }
         stage ('Docker Image') {
             steps {
-                docker.build "springboot-ui-jsp-example:2.${env.BUILD_ID}"
+                script{
+                    docker.build "springboot-ui-jsp-example:2.${env.BUILD_ID}"
+                }
+                
             }
         }
     }
