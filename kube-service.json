@@ -1,0 +1,49 @@
+{
+  "kind": "Service",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "springboot-ui-jsp-ex",
+    "namespace": "default",
+    "labels": {
+      "k8s-app": "springboot-ui-jsp-ex"
+    }
+  },
+  "spec": {
+    "ports": [
+      {
+        "name": "tcp-8080-8080-7nknf",
+        "protocol": "TCP",
+        "port": 8080,
+        "targetPort": 8080,
+        "nodePort": 31809
+      },{
+        "name": "tcp-15672-15672-7nknf",
+        "protocol": "TCP",
+        "port": 15672,
+        "targetPort": 15672,
+        "nodePort": 31810
+      },{
+        "name": "tcp-5672-5672-7nknf",
+        "protocol": "TCP",
+        "port": 5672,
+        "targetPort": 5672,
+        "nodePort": 31811
+      }
+    ],
+    "selector": {
+      "k8s-app": "springboot-ui-jsp-ex"
+    },
+    "type": "LoadBalancer",
+    "sessionAffinity": "None",
+    "externalTrafficPolicy": "Cluster"
+  },
+  "status": {
+    "loadBalancer": {
+      "ingress": [
+        {
+          "hostname": "localhost"
+        }
+      ]
+    }
+  }
+}
