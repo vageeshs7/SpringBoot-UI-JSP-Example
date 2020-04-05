@@ -11,7 +11,7 @@ import org.springframework.jms.core.JmsTemplate;
 import javax.jms.ConnectionFactory;
 
 @Configuration
-@EnableJms
+
 public class MessagingConfig {
     @Value("jms.provider.url")
     private String jmsProviderURL;
