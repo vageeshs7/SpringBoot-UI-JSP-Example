@@ -45,7 +45,7 @@ public class TodoService {
         return filteredTodos;
     }
 
-    public void addNewTodo(Todo todo, String user){
+    public void addNewTodo(Todo todo, String user) throws Exception{
         todo.setUser(user);
         synchronized(todoCount){
             todoCount++;
@@ -66,7 +66,6 @@ public class TodoService {
                 return message;
             }
         });
-
 
     }
 

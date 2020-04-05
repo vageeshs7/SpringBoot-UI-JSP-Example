@@ -39,7 +39,11 @@ public class TodoController {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         final Todo todo = new Todo(0, name, desc, dateFormat.parse(targetDateStr), false);
-        service.addNewTodo(todo, name);
+        try {
+            service.addNewTodo(todo, name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         model.put("todos", service.retrieveTodos(name));
         return "list-todos";
