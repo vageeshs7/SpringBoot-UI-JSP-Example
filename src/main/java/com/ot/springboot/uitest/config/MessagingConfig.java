@@ -32,6 +32,7 @@ public class MessagingConfig {
     @Bean
     public ConnectionFactory messagingConnectionFactory(){
         ConnectionFactory connectionFactory = new JmsConnectionFactory(jmsProviderUsername, jmsProviderPassword, jmsProviderURL);
+        System.out.println("Con Fac with " + jmsProviderURL + ", " + jmsProviderUsername + ", " + connectionFactory.getClass());
         return connectionFactory;
     }
 
@@ -40,7 +41,7 @@ public class MessagingConfig {
         CachingConnectionFactory cachingConnectionFactory =
                 new CachingConnectionFactory(messagingConnectionFactory());
         cachingConnectionFactory.setSessionCacheSize(10);
-
+        System.out.println("Creating caching con fac " + cachingConnectionFactory.getClass());
         return cachingConnectionFactory;
     }
 
@@ -50,7 +51,7 @@ public class MessagingConfig {
                 new JmsTemplate(cachingConnectionFactory());
         //jmsTemplate.setDefaultDestination(orderDestination());
         jmsTemplate.setReceiveTimeout(5000);
-
+        System.out.println("Creating jms template : " + jmsTemplate.getClass());
         return jmsTemplate;
     }
 }
