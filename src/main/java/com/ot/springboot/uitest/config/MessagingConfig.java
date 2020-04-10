@@ -30,7 +30,7 @@ public class MessagingConfig {
     public ConnectionFactory messagingConnectionFactory() throws NamingException, IOException {
         logger.info("Creating ConnectionFactory with" + ConnectionFactory.class);
         Properties properties = new Properties();
-        properties.put("java.naming.factory.initial", "org.apache.qpid.jms.jndi.JmsInitialContextFactory");
+        properties.put("java.naming.factory.initial", "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory");
         properties.put("connectionfactory.qpidConnectionFactory", "amqp://springboot-ui-jsp-ex:5672");
         properties.put("jms.username", "guest");
         properties.put("jms.password", "guest");
