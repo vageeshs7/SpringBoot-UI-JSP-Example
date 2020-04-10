@@ -12,6 +12,8 @@ import javax.jms.ConnectionFactory;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -30,7 +32,9 @@ public class MessagingConfig {
     public ConnectionFactory messagingConnectionFactory() throws NamingException, IOException {
         logger.info("Creating ConnectionFactory with" + ConnectionFactory.class);
         Properties properties = new Properties();
-        properties.load(this.getClass().getResourceAsStream("messaging.properties"));
+        File file = new File(this.getClass().getResource("messaging.properties").getPath());
+        logger.info("Reading from file : " + file.getAbsolutePath());
+        properties.load(new FileInputStream(file));
         Context context = new InitialContext(properties);
 
         ConnectionFactory connectionFactory
@@ -49,12 +53,18 @@ public class MessagingConfig {
     }
 
     @Bean
-    public JmsTemplate jmsTemplate() throws IOException, NamingException {
+    public JmsTemplate jmsTemplate()  {
         logger.info("Creating jms template : " + JmsTemplate.class);
         JmsTemplate jmsTemplate =
-                new JmsTemplate(cachingConnectionFactory());
+                null;
+        try {
+            jmsTemplate = new JmsTemplate(cachingConnectionFactory());
+            jmsTemplate.setReceiveTimeout(5000);
+        } catch (Exception e) {
+            logger.error(e);
+        }
         //jmsTemplate.setDefaultDestination(orderDestination());
-        jmsTemplate.setReceiveTimeout(5000);
+
 
         return jmsTemplate;
     }
