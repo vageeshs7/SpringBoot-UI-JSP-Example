@@ -29,7 +29,7 @@ public class LoginController {
         return "login";
     }
 	
-	@RequestMapping(value="/login", method = RequestMethod.POST)
+	@RequestMapping(value="/", method = RequestMethod.POST)
     public String showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password){
 
         boolean isValidUser = service.validateUser(name, password);
