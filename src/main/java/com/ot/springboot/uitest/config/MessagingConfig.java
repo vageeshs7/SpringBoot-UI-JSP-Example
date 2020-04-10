@@ -1,5 +1,7 @@
 package com.ot.springboot.uitest.config;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.qpid.jms.JmsConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -29,10 +31,12 @@ public class MessagingConfig {
         return todoSaveQueueName;
     }
 
+    private Logger logger = LogManager.getLogger(MessagingConfig.class);
+
     @Bean
     public ConnectionFactory messagingConnectionFactory(){
         ConnectionFactory connectionFactory = new JmsConnectionFactory(jmsProviderUsername, jmsProviderPassword, jmsProviderURL);
-        System.out.println("Con Fac with " + jmsProviderURL + ", " + jmsProviderUsername + ", " + connectionFactory.getClass());
+        logger.info("Con Fac with " + jmsProviderURL + ", " + jmsProviderUsername + ", " + connectionFactory.getClass());
         return connectionFactory;
     }
 
@@ -41,7 +45,7 @@ public class MessagingConfig {
         CachingConnectionFactory cachingConnectionFactory =
                 new CachingConnectionFactory(messagingConnectionFactory());
         cachingConnectionFactory.setSessionCacheSize(10);
-        System.out.println("Creating caching con fac " + cachingConnectionFactory.getClass());
+        logger.info("Creating caching con fac " + cachingConnectionFactory.getClass());
         return cachingConnectionFactory;
     }
 
@@ -51,7 +55,7 @@ public class MessagingConfig {
                 new JmsTemplate(cachingConnectionFactory());
         //jmsTemplate.setDefaultDestination(orderDestination());
         jmsTemplate.setReceiveTimeout(5000);
-        System.out.println("Creating jms template : " + jmsTemplate.getClass());
+        logger.info("Creating jms template : " + jmsTemplate.getClass());
         return jmsTemplate;
     }
 }
