@@ -38,17 +38,6 @@
             "securityContext": {
               "privileged": false
             }
-          },
-		  {
-            "name": "todo-list-rabbitmq",
-            "image": "rabbitmq:3.8.3-management",
-            "resources": {},
-            "terminationMessagePath": "/dev/termination-log",
-            "terminationMessagePolicy": "File",
-            "imagePullPolicy": "IfNotPresent",
-            "securityContext": {
-              "privileged": false
-            }
           }
         ],
         "restartPolicy": "Always",
