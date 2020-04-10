@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsTemplate;
 
@@ -16,9 +17,22 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
+@PropertySource("classpath:messaging.properties")
 public class MessagingConfig {
     @Value("${jms.destination.todo-save}")
     private String todoSaveQueueName;
+
+    @Value("${java.naming.factory.initial}")
+    private String initialContext;
+
+    @Value("${jms.provider.url}")
+    private String jmsProviderURL;
+
+    @Value("${jms.username}")
+    private String jmsUsername;
+
+    @Value("${jms.password}")
+    private String jmsPassword;
 
     public String getTodoSaveQueueName() {
         return todoSaveQueueName;
@@ -30,10 +44,10 @@ public class MessagingConfig {
     public ConnectionFactory messagingConnectionFactory() throws NamingException, IOException {
         logger.info("Creating ConnectionFactory with" + ConnectionFactory.class);
         Properties properties = new Properties();
-        properties.put("java.naming.factory.initial", "org.apache.qpid.amqp_1_0.jms.jndi.PropertiesFileInitialContextFactory");
-        properties.put("connectionfactory.qpidConnectionFactory", "amqp://springboot-ui-jsp-ex:5672");
-        properties.put("jms.username", "guest");
-        properties.put("jms.password", "guest");
+        properties.put("java.naming.factory.initial", initialContext);
+        properties.put("connectionfactory.qpidConnectionFactory", jmsProviderURL);
+        properties.put("jms.username", jmsUsername);
+        properties.put("jms.password", jmsPassword);
         Context context = new InitialContext(properties);
 
         ConnectionFactory connectionFactory
