@@ -17,20 +17,8 @@ import java.util.Properties;
 
 @Configuration
 public class MessagingConfig {
-    @Value("${jms.provider.url}")
-    private String jmsProviderURL;
-
-    @Value("${jms.provider.username}")
-    private String jmsProviderUsername;
-
-    @Value("${jms.provider.password}")
-    private String jmsProviderPassword;
-
     @Value("${jms.destination.todo-save}")
     private String todoSaveQueueName;
-
-    @Value("${jms.initial.factory}")
-    private String initialConnectionFactory;
 
     public String getTodoSaveQueueName() {
         return todoSaveQueueName;
@@ -40,7 +28,7 @@ public class MessagingConfig {
 
     @Bean
     public ConnectionFactory messagingConnectionFactory() throws NamingException, IOException {
-        logger.info("Creating ConnectionFactory with " + jmsProviderURL + ", " + jmsProviderUsername + ", " + ConnectionFactory.class);
+        logger.info("Creating ConnectionFactory with" + ConnectionFactory.class);
         Properties properties = new Properties();
         properties.load(this.getClass().getResourceAsStream("messaging.properties"));
         Context context = new InitialContext(properties);
