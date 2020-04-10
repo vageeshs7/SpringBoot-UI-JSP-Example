@@ -32,9 +32,11 @@ public class MessagingConfig {
     public ConnectionFactory messagingConnectionFactory() throws NamingException, IOException {
         logger.info("Creating ConnectionFactory with" + ConnectionFactory.class);
         Properties properties = new Properties();
-        File file = new File(this.getClass().getResource("messaging.properties").getPath());
+        /*File file = new File("classpath:messaging.properties"));
         logger.info("Reading from file : " + file.getAbsolutePath());
-        properties.load(new FileInputStream(file));
+        properties.load(new FileInputStream(file));*/
+        properties.put("java.naming.factory.initial", "org.apache.qpid.jndi.PropertiesFileInitialContextFactory");
+        properties.put("connectionfactory.qpidConnectionFactory", "amqp://guest:guest@clientid/?brokerlist='tcp://springboot-ui-jsp-ex:5672'");
         Context context = new InitialContext(properties);
 
         ConnectionFactory connectionFactory
