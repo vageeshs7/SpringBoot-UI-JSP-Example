@@ -6,7 +6,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jms.annotation.EnableJms;
 
 @SpringBootApplication
-@ComponentScan("com.ot.springboot.uitest")
 @EnableJms
 public class SpringBootUiTestApplication {
 

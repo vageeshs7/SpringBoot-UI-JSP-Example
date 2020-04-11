@@ -5,6 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ot.springboot.uitest.config.MessagingConfig;
 import com.ot.springboot.uitest.dom.Todo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
@@ -21,6 +23,7 @@ public class TodoService {
     private static List<Todo> todos = new ArrayList<Todo>();
     private static Integer todoCount = 3;
     ObjectMapper jsonMapper = new ObjectMapper();
+    private Logger logger = LogManager.getLogger(MessagingConfig.class);
 
     @Autowired
     private JmsTemplate jmsTemplate;
@@ -52,19 +55,7 @@ public class TodoService {
         }
         todos.add(todo);
 
-        jmsTemplate.send(messagingConfig.getTodoSaveQueueName(), new MessageCreator() {
-            @Override
-            public Message createMessage(Session session) throws JMSException {
-                TextMessage message = null;
-                try {
-                    String jsonText = jsonMapper.writeValueAsString(todo);
-                    message = session.createTextMessage(jsonText);
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-                return message;
-            }
-        });
+        jmsTemplate.convertAndSend(messagingConfig.getTodoSaveQueueName(), todo);
 
     }
 
