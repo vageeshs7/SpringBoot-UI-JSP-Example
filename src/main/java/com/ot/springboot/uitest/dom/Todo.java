@@ -1,8 +1,9 @@
 package com.ot.springboot.uitest.dom;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Todo {
+public class Todo implements Serializable {
     private int id;
     private String user;
     private String desc;
