@@ -30,7 +30,7 @@
         "containers": [
           {
             "name": "springboot-ui-jsp-ex",
-            "image": "springboot-ui-jsp-example:2.13",
+            "image": "springboot-ui-jsp-example:1.0",
             "resources": {},
             "terminationMessagePath": "/dev/termination-log",
             "terminationMessagePolicy": "File",
