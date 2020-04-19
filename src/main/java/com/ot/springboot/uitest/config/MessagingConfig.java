@@ -71,17 +71,14 @@ public class MessagingConfig {
     @Bean
     public JmsTemplate jmsTemplate()  {
         logger.info("Creating jms template : " + JmsTemplate.class);
-        JmsTemplate jmsTemplate =
-                null;
+        JmsTemplate jmsTemplate = null;
         try {
             jmsTemplate = new JmsTemplate(cachingConnectionFactory());
             jmsTemplate.setReceiveTimeout(5000);
+            jmsTemplate.setMessageConverter(jacksonJmsMessageConverter());
         } catch (Exception e) {
             logger.error(e);
         }
-        //jmsTemplate.setDefaultDestination(orderDestination());
-
-
         return jmsTemplate;
     }
 

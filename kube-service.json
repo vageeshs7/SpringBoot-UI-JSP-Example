@@ -3,7 +3,6 @@
   "apiVersion": "v1",
   "metadata": {
     "name": "springboot-ui-jsp-ex",
-    "namespace": "default",
     "labels": {
       "k8s-app": "springboot-ui-jsp-ex"
     }
@@ -21,17 +20,6 @@
     "selector": {
       "k8s-app": "springboot-ui-jsp-ex"
     },
-    "type": "LoadBalancer",
-    "sessionAffinity": "None",
-    "externalTrafficPolicy": "Cluster"
-  },
-  "status": {
-    "loadBalancer": {
-      "ingress": [
-        {
-          "hostname": "localhost"
-        }
-      ]
-    }
+    "type": "LoadBalancer"
   }
 }
