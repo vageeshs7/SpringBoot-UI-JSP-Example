@@ -1,6 +1,6 @@
 {
   "kind": "Deployment",
-  "apiVersion": "extensions/v1beta1",
+  "apiVersion": "v1",
   "metadata": {
     "name": "springboot-ui-jsp-ex",
     "namespace": "default",
@@ -29,7 +29,7 @@
       "spec": {
         "containers": [
           {
-            "name": "springboot-ui-jsp-ex",
+            "name": "springboot-ui-jsp-example",
             "image": "springboot-ui-jsp-example:1.0",
             "resources": {},
             "terminationMessagePath": "/dev/termination-log",
