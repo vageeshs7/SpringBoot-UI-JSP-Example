@@ -58,7 +58,7 @@ public class TodoService {
 
     public List<Todo> getTodosFromBackEnd(String user) {
         List<Todo> todoList = new ArrayList<Todo>();
-        String url = backendUrl.replace("${userid}", user);
+        String url = backendUrl.replace("#userid#", user);
         Todo[] todoArray = restTemplate.getForObject(url, Todo[].class);
 
         if(todoArray.length > 0){
