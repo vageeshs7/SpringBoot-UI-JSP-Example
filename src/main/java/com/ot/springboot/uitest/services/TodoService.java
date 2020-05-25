@@ -4,7 +4,6 @@ package com.ot.springboot.uitest.services;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ot.springboot.uitest.config.MessagingConfig;
 import com.ot.springboot.uitest.dom.Todo;
-import jdk.internal.org.objectweb.asm.TypeReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
