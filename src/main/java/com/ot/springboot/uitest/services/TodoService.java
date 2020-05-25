@@ -1,18 +1,18 @@
 package com.ot.springboot.uitest.services;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ot.springboot.uitest.config.MessagingConfig;
 import com.ot.springboot.uitest.dom.Todo;
+import jdk.internal.org.objectweb.asm.TypeReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import javax.jms.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,11 +31,17 @@ public class TodoService {
     @Autowired
     private MessagingConfig messagingConfig;
 
-    static {
+    @Autowired
+    RestTemplate restTemplate;
+
+    @Value("${todolist.backend.url}")
+    private String  backendUrl;
+
+    /*static {
         todos.add(new Todo(1, "admin", "Learn Spring MVC", new Date(),false));
         todos.add(new Todo(2, "admin", "Learn Struts", new Date(), false));
         todos.add(new Todo(3, "admin", "Learn Hibernate", new Date(),false));
-    }
+    }*/
 
     public List<Todo> retrieveTodos(String user) {
         List<Todo> filteredTodos = new ArrayList<Todo>();
@@ -44,7 +50,25 @@ public class TodoService {
                 filteredTodos.add(todo);
             }
         }
+        if(filteredTodos.size() == 0){
+            filteredTodos = this.getTodosFromBackEnd(user);
+            todos.addAll(filteredTodos);
+        }
+
         return filteredTodos;
+    }
+
+    public List<Todo> getTodosFromBackEnd(String user) {
+        List<Todo> todoList = new ArrayList<Todo>();
+        String url = backendUrl.replace("${userid}", user);
+        Todo[] todoArray = restTemplate.getForObject(url, Todo[].class);
+
+        if(todoArray.length > 0){
+            for(Todo todo: todoArray){
+                todoList.add(todo);
+            }
+        }
+        return todoList;
     }
 
     public void addNewTodo(Todo todo, String user) throws Exception{
