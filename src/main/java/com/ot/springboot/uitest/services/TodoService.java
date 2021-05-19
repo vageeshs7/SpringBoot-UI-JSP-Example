@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -58,14 +60,20 @@ public class TodoService {
 
     public List<Todo> getTodosFromBackEnd(String user) {
         List<Todo> todoList = new ArrayList<Todo>();
-        String url = backendUrl.replace("#userid#", user);
-        Todo[] todoArray = restTemplate.getForObject(url, Todo[].class);
+        try {
+			String url = backendUrl.replace("#userid#", user);
+			Todo[] todoArray = restTemplate.getForObject(url, Todo[].class);
 
-        if(todoArray.length > 0){
-            for(Todo todo: todoArray){
-                todoList.add(todo);
-            }
-        }
+			if(todoArray.length > 0){
+			    for(Todo todo: todoArray){
+			        todoList.add(todo);
+			    }
+			}
+		} catch (Exception e) {
+			todoList.add(new Todo(1, user, "Learn Spring MVC", new Date(),false));
+			todoList.add(new Todo(2, user, "Learn Struts", new Date(), false));
+			todoList.add(new Todo(3, user, "Learn Hibernate", new Date(),false));
+		}
         return todoList;
     }
 

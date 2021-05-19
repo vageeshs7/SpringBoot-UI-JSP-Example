@@ -35,8 +35,9 @@ public class TodoController {
     @RequestMapping(value = "/add-new-todo", method = RequestMethod.POST)
     public String submitNewTodo(final ModelMap model, @RequestParam final String desc,
             @RequestParam final String targetDateStr) throws ParseException {
-        final String name = (String) model.get("name");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println("targetDateStr=" + targetDateStr);
+    	final String name = (String) model.get("name");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         final Todo todo = new Todo(0, name, desc, dateFormat.parse(targetDateStr), false);
         try {
